@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anomaly Details</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/details.html">Anomalies</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <h1>Anomaly Details</h1>
+      <div id="anomalies-list">
+        <!-- This is where anomaly details will be displayed -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Your Company</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Fetch anomalies from localStorage and display them
+    document.addEventListener('DOMContentLoaded', function() {
+      const anomalies = JSON.parse(localStorage.getItem('anomalies'));
+      
+      if (anomalies && anomalies.length > 0) {
+        const anomaliesList = document.getElementById('anomalies-list');
+        anomalies.forEach(anomaly => {
+          const anomalyElement = document.createElement('div');
+          anomalyElement.classList.add('anomaly');
+          anomalyElement.innerHTML = `
+            <p><strong>Id:</strong> ${anomaly.id}</p>
+            <p><strong>Message:</strong> ${anomaly.message}</p>
+          `;
+          anomaliesList.appendChild(anomalyElement);
+        });
+      } else {
+        document.getElementById('anomalies-list').innerHTML = '<p>No anomalies to display.</p>';
+      }
+    });
+  </script>
+</body>
+</html>
